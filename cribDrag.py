@@ -145,9 +145,8 @@ def strxor(a, b):  # xor two strings of different lengths
 def shortestLenght(ciphers):
     shortest = len(ciphers[0])
     import base64
-    for k in range(1, len(ciphers)):
-        # xored = strxor(ciphers[0].decode("base64"), ciphers[k].decode("base64"))
-        xored = strxor(base64.b64decode(ciphers[0]), base64.b64decode(ciphers[k]))
+    for index, value in enumerate(ciphers[1:]):
+        xored = strxor(base64.b64decode(ciphers[0]), base64.b64decode(ciphers[index]))
         if len(xored) < shortest:
             shortest = len(xored)
     return shortest
@@ -176,9 +175,8 @@ def printGuess(guesses, toPrint):
             print('')
             print("Position " + str(x) + ": ")
             for y in range(len(guesses[x])):  # so it's easier to print "\n" symbols
-                messagePart = []
-                messagePart.append(guesses[x][y])
-                print("-> " + str(y) + " " + str(messagePart) + " " + str(y))
+                message_part = [guesses[x][y]]
+                print("-> " + str(y) + " " + str(message_part) + " " + str(y))
 
 
 def init():
@@ -213,20 +211,20 @@ def isGoodGuessHard(guess):  # Accepts only [a-z,A-Z] ! : - . , ? \n SPACE
     return True
 
 
-def getTempDecryptedText(ind):
+def get_temp_decrypted_text(ind):
     global currentMessages
 
-    lastLetterInd = 0
+    last_letter_ind = 0
     i = shortest - 1
     while i >= 0:
         if currentMessages[ind][i] != "_":
-            lastLetterInd = i
+            last_letter_ind = i
             i = 0  # stop searching
         i -= 1
-    return currentMessages[ind][:lastLetterInd + 1]
+    return currentMessages[ind][:last_letter_ind + 1]
 
 
-def switchMode():
+def switch_mode():
     global mode
 
     if mode == "cribGuess":
@@ -235,12 +233,12 @@ def switchMode():
         mode = "cribGuess"
 
 
-def isDecrypted(ind):
-    i = shortest - 1
-    while i >= 0:
-        if currentMessages[ind][i] == "_":
+def is_decrypted(ind):
+    index = shortest - 1
+    while index >= 0:
+        if currentMessages[ind][index] == "_":
             return False
-        i -= 1
+        index -= 1
     return True
 
 
@@ -270,7 +268,7 @@ if __name__ == '__main__':
                     "Enter your crib (have to be between \" \"): ")  # use input() instead of raw_input() to be able to use "\n"
 
                 if mode == "cribFollow":
-                    tempDecryptedText = getTempDecryptedText(cipherNb)
+                    tempDecryptedText = get_temp_decrypted_text(cipherNb)
                     crib = tempDecryptedText + crib
 
                 temp = []  # len = shortest cipher
@@ -301,7 +299,7 @@ if __name__ == '__main__':
 
                 print("")
 
-                choice = raw_input(
+                choice = input(
                     "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
 
                 if choice != "none" and choice != "end" and choice != "switch":
@@ -314,12 +312,12 @@ if __name__ == '__main__':
                     if mode == "cribFollow":
                         tempDecryptedText = crib
 
-                    if isDecrypted(cipherNb):
+                    if is_decrypted(cipherNb):
                         choice = 'end'
                         print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED")
 
                 elif choice == "switch":
-                    switchMode()
+                    switch_mode()
 
                 print("The current messages are:")
                 print()
@@ -334,6 +332,4 @@ if __name__ == '__main__':
 
         else:
             print("Not correct message number, try again.")
-
-
             # print(currentMessages)

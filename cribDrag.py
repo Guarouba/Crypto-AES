@@ -1,5 +1,6 @@
 #!/usr/bin/env python 
 # -*- coding: Utf-8 -*-
+import sys
 
 CA = "FA8t5MYjwXLr1XugGj87qFPrF3aSzDcgoazlg49lUcspTiWuryEaLP4LP0UWbKst\
 Set2OX771eaW1H0kXMkeCFIrPC7+PwzheTX8qC29g+Buhw9pmrUOqEvLbNARnPwl\
@@ -122,33 +123,61 @@ mode = "cribGuess"  # or cribFollow
 tempDecryptedText = ""
 
 # Totally decrypted:
-CJPlain = "Trust I seek and I find in you\n'Cause you know I'm here for you\nBody's aching all the time\nReaching a fever pitch\nIgnite the light\nTo seize everything you ever wanted\nIt's such a feelin' that my love\nYou're in control just like a child\nMy worst distraction, my rhythm and blues\n"
-CIPlain = "UHlelo Lobhalomfihlo kuyikhono ukukhuluma phambi sophikisana. Lokhu isayensi kuyisisekelo of security computer zanamuhla. Abacwaningi Security ukudala ezokuphepha ubuchule. Kukhona ubuchule eziningi ezinjalo, owaziwa kakhulu kuba ukubethela. Ukubethela isinika ithuba ukudlulisa ulwazi oluyimfihlo."
-CDPlain = "Scholars agree that classical information are an interesting new topic in the field of e-voting technology, and electrical engineers concur. In this work, we prove the visualization of information retrieval systems. In order to fix this obstacle, we verify not only that Scheme and Markov models are largely incompatible, but that the same is true for the World Wide Web. \n"
-CEPlain = "Leading analysts agree that electronic communication are an interesting new topic in the field of theory, and cyberinformaticians concur. After years of confusing research into scatter/gather I/O, we prove the visualization of write-ahead logging. Of course, this is not always the case. Moth, our new application for voice-over-IP, is the solution to all of these obstacles. \n"
-CCPlain = "Man, cartoons are the best! I like Futurama.\nIt is a sci-fi show about future. The story turns around a guy from the 20th century\nwho was frozen for many years and then he wakes up in a crazy future!\nThey have created 7 seasons and every one of them is just great!\nThey have so many fun characters, professor Farnsworth, Doctor Zoiberg, Leela\nand a robot called Bender! You should watch it!\n"
-CFPlain = "The implications of multimodal algorithms have been far-reaching and pervasive. Given the current status of concurrent technology, information theorists obviously desire the deployment of replication, which embodies the private principles of cyberinformatics. In this position paper we introduce a novel application for the analysis of RAID (Tamkin), proving that Internet QoS and IPv4 can collaborate to fulfill this objective. \n"
-CAPlain = "Vienna is the capital of Austria. It is one of its largests cities.\nVienna is 410 square kilometers, almost 2 million people live there.\nVienna is situated in the Eastern part of Austria, it is standing on Danube river.\nVienna is in the UTC+1 time zone.\nWhen tourists come to Vienna they often visit  Sch\xc3\xb6nbrunn Palace, Austrian Parliament,\nCity Hall, and St. Stephen's Cathedral.\nDo not forget to go to opera when you visit Vienna.\n"
+CJPlain = "Trust I seek and I find in you\n'Cause you know I'm here for you\nBody's aching all the time\nReaching a " \
+          "fever pitch\nIgnite the light\nTo seize everything you ever wanted\nIt's such a feelin' that my " \
+          "love\nYou're in control just like a child\nMy worst distraction, my rhythm and blues\n "
+CIPlain = "UHlelo Lobhalomfihlo kuyikhono ukukhuluma phambi sophikisana. Lokhu isayensi kuyisisekelo of security " \
+          "computer zanamuhla. Abacwaningi Security ukudala ezokuphepha ubuchule. Kukhona ubuchule eziningi ezinjalo, " \
+          "owaziwa kakhulu kuba ukubethela. Ukubethela isinika ithuba ukudlulisa ulwazi oluyimfihlo. "
+CDPlain = "Scholars agree that classical information are an interesting new topic in the field of e-voting " \
+          "technology, and electrical engineers concur. In this work, we prove the visualization of information " \
+          "retrieval systems. In order to fix this obstacle, we verify not only that Scheme and Markov models are " \
+          "largely incompatible, but that the same is true for the World Wide Web. \n "
+CEPlain = "Leading analysts agree that electronic communication are an interesting new topic in the field of theory, " \
+          "and cyberinformaticians concur. After years of confusing research into scatter/gather I/O, we prove the " \
+          "visualization of write-ahead logging. Of course, this is not always the case. Moth, our new application " \
+          "for voice-over-IP, is the solution to all of these obstacles. \n "
+CCPlain = "Man, cartoons are the best! I like Futurama.\nIt is a sci-fi show about future. The story turns around a " \
+          "guy from the 20th century\nwho was frozen for many years and then he wakes up in a crazy future!\nThey " \
+          "have created 7 seasons and every one of them is just great!\nThey have so many fun characters, " \
+          "professor Farnsworth, Doctor Zoiberg, Leela\nand a robot called Bender! You should watch it!\n "
+CFPlain = "The implications of multimodal algorithms have been far-reaching and pervasive. Given the current status " \
+          "of concurrent technology, information theorists obviously desire the deployment of replication, " \
+          "which embodies the private principles of cyberinformatics. In this position paper we introduce a novel " \
+          "application for the analysis of RAID (Tamkin), proving that Internet QoS and IPv4 can collaborate to " \
+          "fulfill this objective. \n "
+CAPlain = "Vienna is the capital of Austria. It is one of its largests cities.\nVienna is 410 square kilometers, " \
+          "almost 2 million people live there.\nVienna is situated in the Eastern part of Austria, it is standing on " \
+          "Danube river.\nVienna is in the UTC+1 time zone.\nWhen tourists come to Vienna they often visit  " \
+          "Sch\xc3\xb6nbrunn Palace, Austrian Parliament,\nCity Hall, and St. Stephen's Cathedral.\nDo not forget to " \
+          "go to opera when you visit Vienna.\n "
 
 # Not totally decrypted:
-CGPlain = "Local-area networks and autonomous epistemologies have been extensively synthesized by cyberneticists. It should be noted that Gob controls hierarchical databases. Existing mobile and real-time heuristics use client-server modalities to explore large-scale theory. While conventional wisdom states that this issue is generally addressed by the development of the Internet, we believe that a different method is necessary. In the opinions of ma__, we view networking as _________________________________________________________"
-CBPlain = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are strictly confidential! Only me, Alice and the __A can read this e-mails._________________________________________________________"
+CGPlain = "Local-area networks and autonomous epistemologies have been extensively synthesized by cyberneticists. It " \
+          "should be noted that Gob controls hierarchical databases. Existing mobile and real-time heuristics use " \
+          "client-server modalities to explore large-scale theory. While conventional wisdom states that this issue " \
+          "is generally addressed by the development of the Internet, we believe that a different method is " \
+          "necessary. In the opinions of many, we view networking as " \
+          "_________________________________________________________ "
+CBPlain = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my " \
+          "cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not " \
+          "doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing " \
+          "it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are " \
+          "strictly confidential! Only me, Alice and the NSA can read this " \
+          "e-mails._________________________________________________________ "
 
 
-def strxor(a, b):  # xor two strings of different lengths
-    if len(a) > len(b):
-        return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a[:len(b)], b)])
-    else:
-        return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a, b[:len(a)])])
+def strxor(s1, s2):  # xor two strings of different lengths
+    return ''.join(chr(a ^ b) for a, b in zip(bytearray(s1), bytearray(s2)))  # zip locks to smallest size
 
 
-def shortestLenght(ciphers):
+def shortest_length(ciphers):
     shortest = len(ciphers[0])
     import base64
     for index, value in enumerate(ciphers[1:]):
-        xored = strxor(base64.b64decode(ciphers[0]), base64.b64decode(ciphers[index]))
-        if len(xored) < shortest:
-            shortest = len(xored)
+        xored_result = strxor(base64.b64decode(ciphers[0]), base64.b64decode(ciphers[index]))
+        if len(xored_result) < shortest:
+            shortest = len(xored_result)
     return shortest
 
 
@@ -182,7 +211,7 @@ def printGuess(guesses, toPrint):
 def init():
     global shortest
     global currentMessages
-    shortest = shortestLenght(ciphers)
+    shortest = shortest_length(ciphers)
     for i in range(len(ciphers)):
         currentMessages.append("_" * shortest)
 
@@ -258,7 +287,7 @@ if __name__ == '__main__':
 
     while choice != "end":
 
-        cipherNb = int("Enter message number: ")
+        cipherNb = int(input("Enter message number: "))
 
         if (cipherNb < len(ciphers)) and (cipherNb >= 0):
             import base64
@@ -300,7 +329,8 @@ if __name__ == '__main__':
                 print("")
 
                 choice = input(
-                    "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
+                    "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption "
+                    "mode, or 'end' to quit: ")
 
                 if choice != "none" and choice != "end" and choice != "switch":
                     position = int(choice)

@@ -115,7 +115,7 @@ Oomj1LwO0CGNDK8WiaFpK0R4MTn+TmQ0V96dclMlqwQchadtYHqOz3s1ZsBsuS6l\
 ql160ogb3o+oJPBlEwf5xpbHr0ZUHSlyZHN7TWiuK4za0qty6KhwJmGkJdzDfFs0\
 WNcvHJaOq+MH5GQ0tkdZ9xlTpy4VXNLlgoCh/qfAcdq5a2FtMa8="
 
-ciphers = [CB, CG]
+ciphers = [CH, CH]
 currentMessages = []
 shortest = 0
 mode = "cribGuess" #or cribFollow
@@ -129,11 +129,9 @@ CEPlain = "Leading analysts agree that electronic communication are an interesti
 CCPlain = "Man, cartoons are the best! I like Futurama.\nIt is a sci-fi show about future. The story turns around a guy from the 20th century\nwho was frozen for many years and then he wakes up in a crazy future!\nThey have created 7 seasons and every one of them is just great!\nThey have so many fun characters, professor Farnsworth, Doctor Zoiberg, Leela\nand a robot called Bender! You should watch it!\n"
 CFPlain = "The implications of multimodal algorithms have been far-reaching and pervasive. Given the current status of concurrent technology, information theorists obviously desire the deployment of replication, which embodies the private principles of cyberinformatics. In this position paper we introduce a novel application for the analysis of RAID (Tamkin), proving that Internet QoS and IPv4 can collaborate to fulfill this objective. \n"
 CAPlain = "Vienna is the capital of Austria. It is one of its largests cities.\nVienna is 410 square kilometers, almost 2 million people live there.\nVienna is situated in the Eastern part of Austria, it is standing on Danube river.\nVienna is in the UTC+1 time zone.\nWhen tourists come to Vienna they often visit  Sch\xc3\xb6nbrunn Palace, Austrian Parliament,\nCity Hall, and St. Stephen's Cathedral.\nDo not forget to go to opera when you visit Vienna.\n"
-
-#Not totally decrypted:
-CGPlain = "Local-area networks and autonomous epistemologies have been extensively synthesized by cyberneticists. It should be noted that Gob controls hierarchical databases. Existing mobile and real-time heuristics use client-server modalities to explore large-scale theory. While conventional wisdom states that this issue is generally addressed by the development of the Internet, we believe that a different method is necessary. In the opinions of ma__, we view networking as _________________________________________________________"
-CBPlain = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are strictly confidential! Only me, Alice and the __A can read this e-mails._________________________________________________________"
-
+CGPlain = "Local-area networks and autonomous epistemologies have been extensively synthesized by cyberneticists. It should be noted that Gob controls hierarchical databases. Existing mobile and real-time heuristics use client-server modalities to explore large-scale theory. While conventional wisdom states that this issue is generally addressed by the development of the Internet, we believe that a different method is necessary. In the opinions of many, we view networking as following a cycle of four phases: refinement, creation, simulation, and creation. Thus, we concentrate our efforts on proving that the partition table and e-business are generally incompatible. \n"
+CBPlain = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are strictly confidential! Only me, Alice and the NSA can read this e-mails..\nSo, dear hacker, stop it right now!\nBest regards,\nEve.\n"
+CHPlain = "Мать с младенцем спасена;\nЗемлю чувствует она.\nНо из бочки кто их вынет?\nБог неужто их покинет?\nСын на ножки поднялся,\nВ дно головкой уперся,\nПонатужился немножко:\n\"Как бы здесь на двор окошко\nНам проделать?\" - молвил он,\nВышиб дно и вышел вон.\nМать и сын теперь на воле;\nВидят холм в широком поле;\nМоре синее кругом,\nДуб зеленый над холмом.\nСын подумал: добрый ужин\nБыл бы нам, однако, нужен.\nЛомит он у дуба сук\nИ в тугой сгибает лук,\nСо креста снурок шелковый\nНатянул на лук дубовый,\nТонку тросточку сломил,\nСтрелкой легкой завострил\nИ пошел на край долины\nУ моря искать дичины.\n"
 
 def strxor(a, b):     # xor two strings of different lengths
 	if len(a) > len(b):
@@ -175,7 +173,13 @@ def printGuess(guesses, toPrint):
 				messagePart = []
 				messagePart.append(guesses[x][y])
 				print "-> " + str(y) + " " + str(messagePart) + " " + str(y)
-
+"""
+def printGuess(guesses, toPrint):
+	f = open('workfile.txt', 'w')
+	printed = str(guesses[0][0])
+	f.write(printed)
+	f.close()
+"""
 def init():
 	global shortest
 	global currentMessages
@@ -273,8 +277,8 @@ if __name__ == '__main__':
 							guess = strxor(xored[i:i+len(crib)], crib)
 
 							guesses.append(guess)
-							if(isGoodGuessHard(guess) == False):
-								printed = False
+							#if(isGoodGuessHard(guess) == False):
+								#printed = False
 
 						else:
 							guesses.append(crib)

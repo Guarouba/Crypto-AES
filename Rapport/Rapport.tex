@@ -1,52 +1,203 @@
-\documentclass[a4paper,10pt]{report}
-\usepackage[american]{babel}
+\documentclass[a4paper,10pt]{article}
+\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[left=2.5cm,top=2cm,right=2.5cm,nohead,nofoot]{geometry}
-\usepackage{url}
+\usepackage[russian, english]{babel}
+\usepackage[toc,page]{appendix}
+
+
+\usepackage[a4paper]{geometry}
+\usepackage{amsmath,amsthm,amssymb,latexsym,amsfonts}
+\usepackage{hyperref}
+\geometry{hscale=0.75,vscale=0.75,centering}
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{diagbox}
+\usepackage{capt-of}
+\usepackage{adjustbox}
 
-\linespread{1.1}
-
-
+\usepackage{xcolor,colortbl}
+\definecolor{Gray}{gray}{0.95}
+\definecolor{Green}{rgb}{0,0.8,0}
+\definecolor{Blue}{rgb}{0,0.9,0.9}
+\definecolor{Pink}{rgb}{0.96,0.80,0.85}
 
 \begin{document}
 
+  \lstset{language=C,
+  basicstyle=\ttfamily\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{cyan},    % comment style
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{blue}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{red},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+} 
+
 \begin{titlepage}
-\begin{center}
-\textbf{\textsc{UNIVERSIT\'E LIBRE DE BRUXELLES}}\\
-\textbf{\textsc{Faculty of Sciences}}\\
-\textbf{\textsc{Departement of Informatics}}
-\vfill{}\vfill{}
-\begin{center}{\Huge INFO-F405: Introduction to Cryptography}\end{center}{\Huge \par}
-\begin{center}{\Huge Breaking AES}\end{center}{\Huge \par}
-\begin{center}{\large Fishel, David
-			\texttt{dfish@ulb.ac.be}\\
-			Mudura, Mircea
-			\texttt{mmudura@ulb.ac.be}\\
-			Orinx, Cedric
-			\texttt{corinx@ulb.ac.be}\\
-			Depuyd, Antoine
-			\texttt{@ulb.ac.be.be} 
-		}\end{center}{\Huge \par}
-\vfill{}\vfill{}
-\begin{flushleft}{\large \textbf{Supervisors :}}\hfill{}\end{flushleft}{\large\par}Prof. O. Marko \texttt{@ulb.ac.be}\\ Ass. N. Vechi \texttt{@ulb.ac.be}\\
-\vfill{}\vfill{}\enlargethispage{3cm}
-\textbf{Academic year 2016~-~2017}
-\end{center}
+    \begin{center}
+
+	\begin{tikzpicture}[remember picture, overlay]
+	  \node [anchor=north east, inner sep=0pt]  at (current page.north east)
+	     {\includegraphics[height=3cm]{Banniere_ULB.png}};
+	\end{tikzpicture}
+	
+        {\Large \textbf{\textsc{Faculty of Sciences}}\\
+        \textbf{\textsc{Computersciences Department}}}
+
+        \vfill{}\vfill{}
+
+        \begin{center}
+            \Huge{INFO-F-405: Introduction to cryptography}\\
+                \huge{Misuse of encryption}
+        ~\\
+        \end{center}
+        \Huge{\par}
+        \begin{center}
+            \large{
+            	\textsc{GROUP 9} \\
+            	~ \\
+                \textsc{DEPUYDT} Antoine \\
+                \textsc{FISHEL} David \\
+                \textsc{KAGRAMANYAN} George \\
+                \textsc{MUDURA} Mircea \\
+                \textsc{ORINX} Cédric \\
+                \textsc{VAN EETVELDT} Jordan
+            }
+        \end{center}
+        \Huge{\par}
+
+       
+        \large{\par}
+
+        \vfill{}\vfill{}\enlargethispage{2cm}
+        
+        \begin{figure} [h!]
+             \centering
+	    \includegraphics[width=5cm]{Sigle_ULB.jpg}
+		\end{figure}
+		
+		\textbf{Academic year 2016-2017}
+
+        
+    \end{center}
 \end{titlepage}
-
-
+\newpage
 \tableofcontents
+\pagebreak
+
+\section{Introduction}
+
+sudo apt-get install texlive-lang-cyrillic
+
+\section{Conclusion}
 
 
-\chapter{Introduction}
+\newpage
+
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+
+\section{Decrypted Messages (group 9)}
+
+\subsection{Message A}
+Vienna is the capital of Austria. It is one of its largests cities.\\
+Vienna is 410 square kilometers, almost 2 million people live there.\\
+Vienna is situated in the Eastern part of Austria, it is standing on Danube river.\\
+Vienna is in the UTC+1 time zone.\\
+When tourists come to Vienna they often visit  Schönbrunn Palace, Austrian Parliament,\\
+City Hall, and St. Stephen's Cathedral.\\
+Do not forget to go to opera when you visit Vienna.\\
+
+\subsection{Message B}
+Shame on you! Shame, shame, shame!
+What are you trying to do? Are you trying to break my cryptosystem?\\
+Do you know that reading other people's letters is not very nice and not polite?\\
+I am not doing that knind of things!\\
+Who on earth gets into my personal life like that? And why are you doing it?\\
+Is someone forcing you? No? If not, then what the hell is wrong with you?\\
+My messages to Alice are strictly confidential! Only me, Alice and the NSA can read this e-mails..\\
+So, dear hacker, stop it right now!\\
+Best regards,\\
+Eve.\\
+
+\subsection{Message C}
+Man, cartoons are the best! I like Futurama.\\
+It is a sci-fi show about future. The story turns around a guy from the 20th century\\
+who was frozen for many years and then he wakes up in a crazy future!\\
+They have created 7 seasons and every one of them is just great!\\
+They have so many fun characters, professor Farnsworth, Doctor Zoiberg, Leela\\
+and a robot called Bender! You should watch it!\\
+
+\subsection{Message D}
+Scholars agree that classical information are an interesting new topic in the field of e-voting technology, and electrical engineers concur. In this work, we prove the visualization of information retrieval systems. In order to fix this obstacle, we verify not only that Scheme and Markov models are largely incompatible, but that the same is true for the World Wide Web. 
+
+\subsection{Message E}
+Leading analysts agree that electronic communication are an interesting new topic in the field of theory, and cyberinformaticians concur. After years of confusing research into scatter/gather I/O, we prove the visualization of write-ahead logging. Of course, this is not always the case. Moth, our new application for voice-over-IP, is the solution to all of these obstacles. 
 
 
-\chapter{Conclusion}
-To be continued.....
-\bibliographystyle{apalike}
+\subsection{Message F}
+The implications of multimodal algorithms have been far-reaching and pervasive. Given the current status of concurrent technology, information theorists obviously desire the deployment of replication, which embodies the private principles of cyberinformatics. In this position paper we introduce a novel application for the analysis of RAID (Tamkin), proving that Internet QoS and IPv4 can collaborate to fulfill this objective. 
 
-\bibliography{mybiblio}
-\addcontentsline{toc}{chapter}{Bibliography}
+\subsection{Message G}
+Local-area networks and autonomous epistemologies have been extensively synthesized by cyberneticists. It should be noted that Gob controls hierarchical databases. Existing mobile and real-time heuristics use client-server modalities to explore large-scale theory. While conventional wisdom states that this issue is generally addressed by the development of the Internet, we believe that a different method is necessary. In the opinions of many, we view networking as following a cycle of four phases: refinement, creation, simulation, and creation. Thus, we concentrate our efforts on proving that the partition table and e-business are generally incompatible. 
+
+\subsection{Message H}
+Мать с младенцем спасена;\\
+Землю чувствует она.\\
+Но из бочки кто их вынет?\\
+Бог неужто их покинет?\\
+Сын на ножки поднялся,\\
+В дно головкой уперся,\\
+Понатужился немножко:\\
+"Как бы здесь на двор окошко\\
+Нам проделать?" - молвил он,\\
+Вышиб дно и вышел вон.\\
+Мать и сын теперь на воле;\\
+Видят холм в широком поле;\\
+Море синее кругом,\\
+Дуб зеленый над холмом.\\
+Сын подумал: добрый ужин\\
+Был бы нам, однако, нужен.\\
+Ломит он у дуба сук\\
+И в тугой сгибает лук,\\
+Со креста снурок шелковый\\
+Натянул на лук дубовый,\\
+Тонку тросточку сломил,\\
+Стрелкой легкой завострил\\
+И пошел на край долины\\
+У моря искать дичины.\\
+
+\subsection{Message I}
+UHlelo Lobhalomfihlo kuyikhono ukukhuluma phambi sophikisana. Lokhu isayensi kuyisisekelo of \mbox security computer zanamuhla. Abacwaningi Security ukudala ezokuphepha ubuchule. Kukhona ubuchule eziningi ezinjalo, owaziwa kakhulu kuba ukubethela. Ukubethela isinika ithuba ukudlulisa ulwazi \mbox oluyimfihlo.
+
+\subsection{Message J}
+Trust I seek and I find in you\\
+'Cause you know I'm here for you\\
+Body's aching all the time\\
+Reaching a fever pitch\\
+Ignite the light\\
+To seize everything you ever wanted\\
+It's such a feelin' that my love\\
+You're in control just like a child\\
+My worst distraction, my rhythm and blues\\
+
+
+\end{appendices}
+
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{rapport}
+
 
 \end{document}

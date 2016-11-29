@@ -7,14 +7,15 @@ def read_cyphers(team):
     ciphers = []
     import os
     for i in range(10):
-        fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
-                             "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")
-        with open(fname, 'r') as file:
-            ciphers.append(file.read())
+        if i != 7:
+            fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
+                                 "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")
+            with open(fname, 'r') as file:
+                ciphers.append(file.read())
     return ciphers
 
 
-ciphers = read_cyphers(9)
+ciphers = read_cyphers(1)
 current_messages = []
 shortest = 0
 mode = "cribGuess"  # or cribFollow
@@ -69,9 +70,13 @@ def print_messages(messages, line_length=100):
         text_len = len(value)
         for part in xrange(0, text_len, line_length):
             if part > text_len - line_length:
-                print("     " + str(value[part:]))
+                temp = []
+                temp.append(value[part:])
+                print("     " + str(temp))
             else:
-                print ("     " + str(value[part:part + line_length]))
+                temp = []
+                temp.append(value[part:part + line_length])
+                print ("     " + str(temp))
 
 
 def print_guess(guesses, to_print):
@@ -211,8 +216,8 @@ def root_of_all_decryption():
                             xored = str_xor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
                             guess = str_xor(xored[index:index + len(crib)], crib)
                             guesses.append(guess)
-                        # if(isGoodGuessHard(guess) == False):
-                        # printed = False
+                            if not is_good_guess_hard(guess):
+                                printed = False
                         else:
                             guesses.append(crib)
                     temp.append(guesses)
@@ -223,7 +228,8 @@ def root_of_all_decryption():
                 print_guess(temp, toPrint)
                 print("")
                 choice = raw_input(
-                    "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
+                    "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ").strip(
+                    " ")
                 if choice != "none" and choice != "end" and choice != "switch":
                     position = int(choice)
                     for index in range(len(current_messages)):

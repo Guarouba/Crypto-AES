@@ -38,6 +38,11 @@ def str_xor(a, b):  # xor two strings of different lengths
 
 
 def shortest_length(ciphers):
+    """
+    Find shortest minion
+    :param ciphers:
+    :return:
+    """
     shortest = len(ciphers[0])
     for k in range(1, len(ciphers)):
         xored = str_xor(ciphers[0].decode("base64"), ciphers[k].decode("base64"))
@@ -132,6 +137,10 @@ def get_temp_decrypted_text(ind):
 
 
 def switch_mode():
+    """
+    Some crap with decoding
+    :return: nothing, zilch, squat
+    """
     global mode
     if mode == "cribGuess":
         mode = "cribFollow"
@@ -140,6 +149,11 @@ def switch_mode():
 
 
 def is_decrypted(ind):
+    """
+    Check if message identified by index is decrypted
+    :param ind:  index of the message to be checked
+    :return:  state of decryption
+    """
     i = shortest - 1
     while i >= 0:
         if current_messages[ind][i] == "_":
@@ -191,10 +205,10 @@ if __name__ == '__main__':
                     "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
                 if choice != "none" and choice != "end" and choice != "switch":
                     position = int(choice)
-                    for index, it_value in enumerate(current_messages):
+                    for index in range(len(current_messages)):
                         crib_length = len(temp[position][index])
-                        it_value = it_value[:position] + temp[position][index] + it_value[
-                                                                                             position + crib_length:]
+                        current_messages[index] = current_messages[index][:position] + temp[position][index] + \
+                                                  current_messages[index][position + crib_length:]
                     if mode == "cribFollow":
                         tempDecryptedText = crib
                     if is_decrypted(cipherNb):

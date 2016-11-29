@@ -168,13 +168,13 @@ if __name__ == '__main__':
                     crib = tempDecryptedText + crib
                 temp = []  # len = shortest cipher
                 toPrint = []
-                for i in range(shortest - len(crib) + 1):
+                for index in range(shortest - len(crib) + 1):
                     guesses = []  # len = len(ciphers)
                     printed = True
                     for k in range(len(ciphers)):
                         if cipherNb != k:  # pas de xor avec sois-meme
                             xored = str_xor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
-                            guess = str_xor(xored[i:i + len(crib)], crib)
+                            guess = str_xor(xored[index:index + len(crib)], crib)
                             guesses.append(guess)
                         # if(isGoodGuessHard(guess) == False):
                         # printed = False
@@ -191,10 +191,10 @@ if __name__ == '__main__':
                     "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
                 if choice != "none" and choice != "end" and choice != "switch":
                     position = int(choice)
-                    for i in range(len(current_messages)):
-                        crib_length = len(temp[position][i])
-                        current_messages[i] = current_messages[i][:position] + temp[position][i] + current_messages[i][
-                                                                                                   position + crib_length:]
+                    for index, it_value in enumerate(current_messages):
+                        crib_length = len(temp[position][index])
+                        it_value = it_value[:position] + temp[position][index] + it_value[
+                                                                                             position + crib_length:]
                     if mode == "cribFollow":
                         tempDecryptedText = crib
                     if is_decrypted(cipherNb):

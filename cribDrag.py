@@ -46,28 +46,33 @@ def shortest_length(ciphers):
     return shortest
 
 
-def printMessages(messages, lineLenght=100):
-    for i in range(len(messages)):
-        temp = []
-        temp.append(messages[i])
-        print("Message " + str(i) + ":")
-
-        text_len = len(messages[i])
-        for part in xrange(0, text_len, lineLenght):
-            temp = []
-            if part > text_len - lineLenght:
-                temp.append(messages[i][part:])  # print a list to be able to see the symbol "\n"
-                print("    " + str(temp))
+def print_messages(messages, line_length=100):
+    """
+    Print the messages passed in and hope  Antoine can explain this at the presentations
+    :param messages:
+    :param line_length:
+    :return:
+    """
+    for index, value in enumerate(messages):
+        print "Message " + str(index) + ": "
+        text_len = len(value)
+        for part in xrange(0, text_len, line_length):
+            if part > text_len - line_length:
+                print("     " + str(value[part:]))
             else:
-                temp.append(messages[i][part:part + lineLenght])
-                print("    " + str(temp))
+                print ("     " + str(value[part:part + line_length]))
 
 
 def print_guess(guesses, to_print):
+    """
+    Print the guess that Antoine will explain later
+    :param guesses: a freaking guess by the software
+    :param to_print: string to print
+    :return:
+    """
     for index_1, value_1 in enumerate(guesses):
         if to_print[index_1]:
-            print ''
-            print "Position " + str(index_1) + ": "
+            print "\nPosition " + str(index_1) + ": "
             for index_2, value_2 in enumerate(value_1):  # so it's easier to print "\n" symbols
                 message_part = [value_2]
                 print "-> " + str(index_2) + " " + str(message_part) + " " + str(index_2)
@@ -85,7 +90,6 @@ def printGuess(guesses, toPrint):
 def init():
     global shortest
     global current_messages
-
     shortest = shortest_length(ciphers)
     for i in range(len(ciphers)):
         current_messages.append("_" * shortest)
@@ -117,7 +121,6 @@ def is_good_guess_hard(guess):  # Accepts only [a-z,A-Z] ! : - . , ? \n SPACE
 
 def get_temp_decrypted_text(ind):
     global current_messages
-
     last_letter_ind = 0
     i = shortest - 1
     while i >= 0:
@@ -130,7 +133,6 @@ def get_temp_decrypted_text(ind):
 
 def switch_mode():
     global mode
-
     if mode == "cribGuess":
         mode = "cribFollow"
     else:
@@ -149,92 +151,61 @@ def is_decrypted(ind):
 # --------------------------------------  MAIN  --------------------------------------
 
 if __name__ == '__main__':
-    # init()
-    #
-    # choice = ""
-    # tempDecryptedText = ""
-    #
-    # print("The current messages are:")
-    # print''
-    # printMessages(currentMessages, 128)
-    # print''
-    #
-    # while choice != "end":
-    #
-    #     cipherNb = int(raw_input("Enter message number: "))
-    #
-    #     # if (cipherNb < len(ciphers)) and (cipherNb >= 0):
-    #     #
-    #     #     try:
-    #     #         crib = input(
-    #     #             "Enter your crib (have to be between \" \"): ")  # use input() instead of raw_input() to be able to use "\n"
-    #     #
-    #     #         if mode == "cribFollow":
-    #     #             tempDecryptedText = get_temp_decrypted_text(cipherNb)
-    #     #             crib = tempDecryptedText + crib
-    #     #
-    #     #         temp = []  # len = shortest cipher
-    #     #         toPrint = []
-    #     #         for i in range(shortest - len(crib) + 1):
-    #     #             guesses = []  # len = len(ciphers)
-    #     #             printed = True
-    #     #             for k in range(len(ciphers)):
-    #     #                 if cipherNb != k:  # pas de xor avec sois-meme
-    #     #                     xored = strxor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
-    #     #                     guess = strxor(xored[i:i + len(crib)], crib)
-    #     #
-    #     #                     guesses.append(guess)
-    #     #                 # if(isGoodGuessHard(guess) == False):
-    #     #                 # printed = False
-    #     #
-    #     #                 else:
-    #     #                     guesses.append(crib)
-    #     #
-    #     #             temp.append(guesses)
-    #     #             if printed:
-    #     #                 toPrint.append(True)
-    #     #             else:
-    #     #                 toPrint.append(False)
-    #     #
-    #     #         printGuess(temp, toPrint)
-    #     #
-    #     #         print("")
-    #     #
-    #     #         choice = raw_input(
-    #     #             "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
-    #     #
-    #     #         if choice != "none" and choice != "end" and choice != "switch":
-    #     #             position = int(choice)
-    #     #             for i in range(len(currentMessages)):
-    #     #                 cribLenght = len(temp[position][i])
-    #     #                 currentMessages[i] = currentMessages[i][:position] + temp[position][i] + currentMessages[i][
-    #     #                                                                                          position + cribLenght:]
-    #     #
-    #     #             if mode == "cribFollow":
-    #     #                 tempDecryptedText = crib
-    #     #
-    #     #             if is_decrypted(cipherNb):
-    #     #                 choice = 'end'
-    #     #                 print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED")
-    #     #
-    #     #         elif choice == "switch":
-    #     #             switch_mode()
-    #     #
-    #     #         print("The current messages are:")
-    #     #         print''
-    #     #         printMessages(currentMessages, 128)
-    #     #         print''
-    #     #
-    #     #     except NameError:
-    #     #         print("Don't forget to write your crib between \" \"")
-    #     #     except SyntaxError:
-    #     #         print("Don't forget to write your crib between \" \"")
-    #     #
-    #     # else:
-    #     #     print("Not correct message number, try again.")
-    #     #
-    #     #
-    #     #     # print(currentMessages)
-    for i in "bazinga":
-        print i
-        print ""
+    init()
+    choice = ""
+    tempDecryptedText = ""
+    print("The current messages are:\n\n")
+    print_messages(current_messages, 128)
+    print''
+    while choice != "end":
+        cipherNb = int(raw_input("Enter message number: "))
+        if (cipherNb < len(ciphers)) and (cipherNb >= 0):
+            try:
+                crib = input(
+                    "Enter your crib (have to be between \" \"): ")  # use input() instead of raw_input() to be able to use "\n"
+                if mode == "cribFollow":
+                    tempDecryptedText = get_temp_decrypted_text(cipherNb)
+                    crib = tempDecryptedText + crib
+                temp = []  # len = shortest cipher
+                toPrint = []
+                for i in range(shortest - len(crib) + 1):
+                    guesses = []  # len = len(ciphers)
+                    printed = True
+                    for k in range(len(ciphers)):
+                        if cipherNb != k:  # pas de xor avec sois-meme
+                            xored = str_xor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
+                            guess = str_xor(xored[i:i + len(crib)], crib)
+                            guesses.append(guess)
+                        # if(isGoodGuessHard(guess) == False):
+                        # printed = False
+                        else:
+                            guesses.append(crib)
+                    temp.append(guesses)
+                    if printed:
+                        toPrint.append(True)
+                    else:
+                        toPrint.append(False)
+                print_guess(temp, toPrint)
+                print("")
+                choice = raw_input(
+                    "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption mode, or 'end' to quit: ")
+                if choice != "none" and choice != "end" and choice != "switch":
+                    position = int(choice)
+                    for i in range(len(current_messages)):
+                        crib_length = len(temp[position][i])
+                        current_messages[i] = current_messages[i][:position] + temp[position][i] + current_messages[i][
+                                                                                                   position + crib_length:]
+                    if mode == "cribFollow":
+                        tempDecryptedText = crib
+                    if is_decrypted(cipherNb):
+                        choice = 'end'
+                        print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED")
+                elif choice == "switch":
+                    switch_mode()
+                print("The current messages are:\n\n")
+                print_messages(current_messages, 128)
+                print''
+            except (NameError, SyntaxError):
+                print("Don't forget to write your crib between \" \"")
+        else:
+            print("Not correct message number, try again.")

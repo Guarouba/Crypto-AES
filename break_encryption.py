@@ -7,11 +7,10 @@ def read_cyphers(team):
     ciphers = []
     import os
     for i in range(10):
-        if i != 7:
-            fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
-                                 "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")
-            with open(fname, 'r') as file:
-                ciphers.append(file.read())
+        fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
+                             "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")
+        with open(fname, 'r') as file:
+            ciphers.append(file.read())
     return ciphers
 
 
@@ -21,7 +20,7 @@ shortest = 0
 mode = "cribGuess"  # or cribFollow
 tempDecryptedText = ""
 
-# Totally decrypted:
+# Totally decrypted (group 9)
 CJPlain = "Trust I seek and I find in you\n'Cause you know I'm here for you\nBody's aching all the time\nReaching a fever pitch\nIgnite the light\nTo seize everything you ever wanted\nIt's such a feelin' that my love\nYou're in control just like a child\nMy worst distraction, my rhythm and blues\n"
 CIPlain = "UHlelo Lobhalomfihlo kuyikhono ukukhuluma phambi sophikisana. Lokhu isayensi kuyisisekelo of security computer zanamuhla. Abacwaningi Security ukudala ezokuphepha ubuchule. Kukhona ubuchule eziningi ezinjalo, owaziwa kakhulu kuba ukubethela. Ukubethela isinika ithuba ukudlulisa ulwazi oluyimfihlo."
 CDPlain = "Scholars agree that classical information are an interesting new topic in the field of e-voting technology, and electrical engineers concur. In this work, we prove the visualization of information retrieval systems. In order to fix this obstacle, we verify not only that Scheme and Markov models are largely incompatible, but that the same is true for the World Wide Web. \n"
@@ -33,6 +32,18 @@ CGPlain = "Local-area networks and autonomous epistemologies have been extensive
 CBPlain = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are strictly confidential! Only me, Alice and the NSA can read this e-mails..\nSo, dear hacker, stop it right now!\nBest regards,\nEve.\n"
 CHPlain = "Мать с младенцем спасена;\nЗемлю чувствует она.\nНо из бочки кто их вынет?\nБог неужто их покинет?\nСын на ножки поднялся,\nВ дно головкой уперся,\nПонатужился немножко:\n\"Как бы здесь на двор окошко\nНам проделать?\" - молвил он,\nВышиб дно и вышел вон.\nМать и сын теперь на воле;\nВидят холм в широком поле;\nМоре синее кругом,\nДуб зеленый над холмом.\nСын подумал: добрый ужин\nБыл бы нам, однако, нужен.\nЛомит он у дуба сук\nИ в тугой сгибает лук,\nСо креста снурок шелковый\nНатянул на лук дубовый,\nТонку тросточку сломил,\nСтрелкой легкой завострил\nИ пошел на край долины\nУ моря искать дичины.\n"
 
+
+# Totally decrypted (group 1)
+CEPlain = "The synthesis of Lamport clocks is a private question. Here, we disprove the emulation of multicast frameworks. We prove that flip-flop gates and interrupts can cooperate to solve this issue. Our intent here is to set the record straight. \n"
+CJPlain = "So close, no matter how far\nLook up to the skies and see\nNow it looks as though they're here to stay\nWe could have had it all\nHe won't have it, he knows his whole back city's ropes\nCards on the table, we're both showing hearts\nFeel so paper-thin\nWhen it gets cold\nI'm down on my knees, I wanna take you there\n"
+CIPlain = "Kriptografie is 'n kuns van kommunikasie in die teenwoordigheid van 'n teenstander. Hierdie wetenskap is die fondament van die moderne rekenaar sekuriteit. Sekuriteit navorsers skep sekuriteit algoritmes. Daar is baie sulke algoritmes, die mees bekende is enkripsie. Enkripsie gee ons 'n manier om vertroulike inligting oor te dra.\n"
+CFPlain = "Recent advances in flexible epistemologies and unstable communication do not necessarily obviate the need for the World Wide Web. In this paper, we disprove the extensive unification of fiber-optic cables and local-area networks, which embodies the extensive principles of cyberinformatics [5]. Larum, our new methodology for checksums, is the solution to all of these obstacles. \n"
+CCPlain = "I like animated cartoons!\nSouth park is a cartoon that is going on for a long time now. They are showing their 20th season right now.\nIt is very funny, they often find interesting ways to talk about contreversial topics of our society\nincluding popular culture, politics and just trendy subjects.\nmain characters in this show are 4 little boys. Their names are \nStan Marsh, Kyle Broflovski, Kenny McCormick and Eric Cartman.\n"
+CGPlain = "Reinforcement learning and Moore's Law, while confirmed in theory, have not until recently been considered compelling. A confusing problem in operating systems is the evaluation of the visualization of 128 bit architectures. The usual methods for the understanding of courseware do not apply in this area. The construction of information retrieval systems would improbably degrade the confusing unification of architecture and voice-over-IP.\n"
+CAPlain = "The capital of Great Britan is London. It is the biggest city in England. \nIt is situated in the South-East of the UK. London is standing on the river Thames.\nIt's area is just below 2000 square kilometers, about 8.5 million people live there. \nLondon is in the GMT+0 time zone. \nAmong its most famous tourist attractions you may find Tower Bridge, \nTrafalgar Square, London Eye and the Big Ben.\nWhen you visit London, do not forget to say \"Hi!\" to the Queen.\n"
+CBPlain = "What are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things! Shame on you! Shame, shame, shame!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Bob are strictly confidential! Only me, Bob and the NSA can read this e-mails..\nSo, dear hacker, stop it right now!\nBest regards,\nAlice.\n"
+CDPlain = "Many scholars would agree that, had it not been for the construction of massive multiplayer online role-playing games, the study of SCSI disks might never have occurred. Given the current status of stochastic methodologies, biologists clearly desire the simulation of wide-area networks. We introduce a novel system for the exploration of simulated annealing (Rasp), validating that the producer-consumer problem and Boolean logic are largely incompatible. This is rarely a confirmed goal but has ample historical precedence. \n"
+CHplain = "Три девицы под окном\nПряли поздно вечерком.\n\"Кабы я была царица,-\nГоворит одна девица,-\nТо на весь крещеный мир\nПриготовила б я пир\".\n- \"Кабы я была царица,-\nГоворит ее сестрица,-\nТо на весь бы мир одна\nНаткала я полотна\".\n- \"Кабы я была царица,-\nТретья молвила сестрица,-\nЯ б для батюшки-царя\nРодила богатыря\".\n"
 
 def str_xor(a, b):  # xor two strings of different lengths
     """
@@ -66,6 +77,11 @@ def print_messages(messages, line_length=100):
     :return: nothing, nada, zilch, squat
     """
     for index, value in enumerate(messages):
+        if(index == 7):
+            f = open('workfile.txt', 'w')
+            printed = str(value)
+            f.write(printed)
+            f.close()
         print "Message " + str(index) + ": "
         text_len = len(value)
         for part in xrange(0, text_len, line_length):
@@ -216,8 +232,8 @@ def root_of_all_decryption():
                             xored = str_xor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
                             guess = str_xor(xored[index:index + len(crib)], crib)
                             guesses.append(guess)
-                            if not is_good_guess_hard(guess):
-                                printed = False
+                            #if not is_good_guess_hard(guess):
+                            #    printed = False
                         else:
                             guesses.append(crib)
                     temp.append(guesses)

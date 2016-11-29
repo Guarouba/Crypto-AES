@@ -34,6 +34,12 @@ CHPlain = "Мать с младенцем спасена;\nЗемлю чувст
 
 
 def str_xor(a, b):  # xor two strings of different lengths
+    """
+    Perform xor on 2 strings
+    :param a: 1st string
+    :param b: 2nd string
+    :return: string of xor'ed values
+    """
     return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a, b)])
 
 
@@ -41,7 +47,7 @@ def shortest_length(ciphers):
     """
     Find shortest minion
     :param ciphers:
-    :return:
+    :return: shortest length in bytes
     """
     shortest = len(ciphers[0])
     for k in range(1, len(ciphers)):
@@ -56,7 +62,7 @@ def print_messages(messages, line_length=100):
     Print the messages passed in and hope  Antoine can explain this at the presentations
     :param messages:
     :param line_length:
-    :return:
+    :return: nothing, nada, zilch, squat
     """
     for index, value in enumerate(messages):
         print "Message " + str(index) + ": "
@@ -93,6 +99,10 @@ def printGuess(guesses, toPrint):
 
 
 def init():
+    """
+    Initialise crap
+    :return:
+    """
     global shortest
     global current_messages
     shortest = shortest_length(ciphers)
@@ -110,6 +120,11 @@ def is_good_guess(guess):  # Don't accept special symbols
 
 
 def is_good_guess_hard(guess):  # Accepts only [a-z,A-Z] ! : - . , ? \n SPACE
+    """
+    Be a magician an guess
+    :param guess:
+    :return:
+    """
     for value in guess:
         symbol = value.encode("hex")
         if (('40' < symbol < '5b') or ('60' < symbol < '7b')
@@ -125,6 +140,11 @@ def is_good_guess_hard(guess):  # Accepts only [a-z,A-Z] ! : - . , ? \n SPACE
 
 
 def get_temp_decrypted_text(ind):
+    """
+    Display temporary decrypted text
+    :param ind:
+    :return:
+    """
     global current_messages
     last_letter_ind = 0
     i = shortest - 1
@@ -164,7 +184,8 @@ def is_decrypted(ind):
 
 # --------------------------------------  MAIN  --------------------------------------
 
-if __name__ == '__main__':
+def root_of_all_decryption():
+    global tempDecryptedText
     init()
     choice = ""
     tempDecryptedText = ""
@@ -213,7 +234,7 @@ if __name__ == '__main__':
                         tempDecryptedText = crib
                     if is_decrypted(cipherNb):
                         choice = 'end'
-                        print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED")
+                        print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED HUZZAH")
                 elif choice == "switch":
                     switch_mode()
                 print("The current messages are:\n\n")
@@ -222,4 +243,8 @@ if __name__ == '__main__':
             except (NameError, SyntaxError):
                 print("Don't forget to write your crib between \" \"")
         else:
-            print("Not correct message number, try again.")
+            print("Incorrect message number, try again")
+
+
+if __name__ == '__main__':
+    root_of_all_decryption()

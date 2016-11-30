@@ -45,6 +45,26 @@ CBPlain = "What are you trying to do? Are you trying to break my cryptosystem?\n
 CDPlain = "Many scholars would agree that, had it not been for the construction of massive multiplayer online role-playing games, the study of SCSI disks might never have occurred. Given the current status of stochastic methodologies, biologists clearly desire the simulation of wide-area networks. We introduce a novel system for the exploration of simulated annealing (Rasp), validating that the producer-consumer problem and Boolean logic are largely incompatible. This is rarely a confirmed goal but has ample historical precedence. \n"
 CHplain = "Три девицы под окном\nПряли поздно вечерком.\n\"Кабы я была царица,-\nГоворит одна девица,-\nТо на весь крещеный мир\nПриготовила б я пир\".\n- \"Кабы я была царица,-\nГоворит ее сестрица,-\nТо на весь бы мир одна\nНаткала я полотна\".\n- \"Кабы я была царица,-\nТретья молвила сестрица,-\nЯ б для батюшки-царя\nРодила богатыря\".\n"
 
+# Totally decrypted (group 10)
+CAPlain = "Warsaw is the capital of Poland. It is sutuated in the middle of the Eastern part of the country.\nWarsaw is one of the largest cities in poland. The city ares is about 500 square kilometers.\nMore than 1.7 million people live there. The city is build on the Vistula river.\nIt is in the UTC+1 time zone.\nWhen plople come to Warsaw they often visit Palace on the Water, Krasiński Palace\nRoyal Castle, Castle Square, Grand Theatre and Krakowskie Przedmieście as well as Wilanów Palace.\nDo not forget to try some Żubrówka"
+CBPlain = "What are you trying to do? Are you trying to break my cryptosystem?\nI am not doing that knind of things! Shame on you! Shame, shame, shame!\nDo you know that reading other people's letters is not very nice and not polite?\nOnly me, Eve and the NSA can read this e-mails..\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Eve are strictly confidential!\nSo, dear hacker, stop it right now!\nBest regards,\nEve.\n"
+CCPlain = "What is your favorite cartoon? I really like Family Guy!\nIt's so funny! Even though sometimes it is a little bit stupid,\nthey of ten joke about very contraversial topics like politics and religion.\nThey have so many different styles of episodes! Some about sci-fi stuff (like time-travel),\nother are parodies (like a parody of Star Wars). They even have a dog that can speak, his name is Brian.\nAnd there is an evil baby Stewie. Other characters are called Peter, Lois, Chris and Meg.\n"
+CDPlain = "Recent advances in adaptive algorithms and ambimorphic algorithms offer a viable alternative to kernels. Given the current status of pseudorandom modalities, computational biologists particularly desire the improvement of suffix trees. We introduce a novel methodology for the construction of Lamport clocks (Cod), verifying that 802.11 mesh networks can be made constant-time, atomic, and cacheable. \n"
+CEPlain = "The visualization of RAID has visualized IPv6, and current trends suggest that the study of Moore's Law will soon emerge. In fact, few hackers worldwide would disagree with the study of IPv7. In this position paper, we confirm not only that 802.11 mesh networks can be made interactive, event-driven, and conjurrent, but that the same is true for sensor networks. \n"
+CFPlain = "The software engineering approach to congestion control is defined not only by the study of replication, but also by the essential need for reinforcement learning. In this work, we argue the synthesis of the partition table. Here, we concentrate our efforts on proving that the little-known random algorithm for the improvement of hash tables by J. Ullman et al. [1"
+CJPlain = "Unified ubiquitous algorithms have led to many appropriate advances, including IPv7 and Internet QoS. In fact, few cyberinformaticians would disagree with the simulation of the World Wide Web. This is a direct result of the study of Byzantine fault tolerance [12]. To what extent can voice-over-IP be visualised to realize this intent?\n\n"
+CHPlain = "К морю лишь подходит он,\
+			Вот и слышит будто стон...\
+			Видно, на море не тихо:\
+			Смотрит - видит дело лихо:\
+			Бьется лебедь средь зыбей,\
+			Коршун носится над ней;\
+			Та бедняжка так и плещет,\
+			Воду вкруг "
+CIPlain = "Kriptografija je umjetnost komuniciranja u prisutnosti udarac. Ova znanost je temelj moderne računalne sigurnosti. Sigurnosni istraživači stvaranje sigurnosnih algoritama. Ima mnogo takvih algoritama, najpoznatiji je šifriranje. Enkripcija nam daje način za prijenos povjerljivih podataka."
+CJPlain = "There's a fire starting in my heart\nEvery day for us something new\nIs this the real life?\nThere's a shadow hanging over me.\nWhat would I do without your smart mouth?\nDo you ever feel\nTo drop bombs, but he keeps on forgettin'\nLife is a mystery, everyone must stand alone\nYou're not alone\n"
+
+
 def str_xor(a, b):  # xor two strings of different lengths
     """
     Perform xor on 2 strings
@@ -95,6 +115,31 @@ def print_messages(messages, line_length=100):
                 print ("     " + str(temp))
 
 
+def helpful_caracters(string):
+	"""
+	:return: True if string doesn't contain shitty characters
+	"""
+	return (not "*" in  string and \
+            not ":" in  string and \
+            not "<" in  string and \
+            not ">" in  string and \
+            not "{" in  string and \
+            not "}" in  string and \
+            not "/" in  string and \
+            not "=" in  string and \
+            not "~" in  string and \
+            not "&" in  string and \
+            not ";" in  string and \
+            not "_" in  string and \
+            not "#" in  string and \
+            not "@" in  string and \
+            not "%" in  string and \
+            not "$" in  string and \
+            not "^" in  string and \
+            not "(" in  string and \
+            not ")" in  string and \
+            not "|" in  string)
+
 def print_guess(guesses, to_print):
     """
     Print the guess that Antoine will explain later
@@ -104,10 +149,17 @@ def print_guess(guesses, to_print):
     """
     for index_1, value_1 in enumerate(guesses):
         if to_print[index_1]:
-            print "\nPosition " + str(index_1) + ": "
-            for index_2, value_2 in enumerate(value_1):  # so it's easier to print "\n" symbols
+            i = 0
+            for index_2, value_2 in enumerate(value_1):
                 message_part = [value_2]
-                print "-> " + str(index_2) + " " + str(message_part) + " " + str(index_2)
+                if helpful_caracters(str(message_part)):
+                	i+=1
+            if i > 1: # if more than 1 'readable' guess
+            	print "\nPosition " + str(index_1) + ": "
+            	for index_2, value_2 in enumerate(value_1):  # so it's easier to print "\n" symbols
+                	message_part = [value_2]
+                	if helpful_caracters(str(message_part)):
+            			print "-> " + str(index_2) + " " + str(message_part) + " " + str(index_2)
 
 
 """

@@ -79,21 +79,31 @@ def load_word_freq_engligh():
 hash_crib_dictionary = {}  # {'ar':[car,bar,Mars,...],'ea':[sea,tea,..]}
 
 
+def capitalize(val):
+    return chr(ord(val[0]) - 32).join(val[1:]) if len(val) > 1 else chr(ord(val) - 32)
+
+
 def create_indiv_crib_hash(word):
     global hash_crib_dictionary
     crib_size = 1
     l_word = len(word)
     while crib_size <= l_word:
-        for i in range(l_word - crib_size):
-            temp_l = hash_crib_dictionary.get_or_else(word, [])
-            temp_l.append()
-            hash_crib_dictionary[word[i:crib_size]]=
+        for i in range(l_word - crib_size + 1):
+            temp_l = hash_crib_dictionary.get(word[i:crib_size + 1], set())
+            temp_l.add(word)
+            hash_crib_dictionary[word[i:crib_size + 1]] = temp_l
+        crib_size += 1
 
-    def create_hash_crib():
-        ll = load_word_freq_engligh()
-        for current_word in ll:
-            create_indiv_crib_hash(current_word)
 
-    if __name__ == '__main__':
-        # dong()
-        load_word_freq_engligh()
+def create_hash_crib():
+    ll = load_word_freq_engligh()[:40]
+    for current_word in ll:
+        create_indiv_crib_hash(current_word)
+    print ll
+    print hash_crib_dictionary
+
+
+if __name__ == '__main__':
+    # dong()
+    # load_word_freq_engligh()
+    create_hash_crib()

@@ -6,6 +6,7 @@
 def read_cyphers(team):
     ciphers = []
     import os
+
     for i in range(10):
         fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
                              "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")

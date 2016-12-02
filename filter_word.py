@@ -34,9 +34,25 @@ def get_possible_matching_words_of_max_length(partial, length):
         candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
     print (set(candidates))
 
+def group_word(list_of_word):
+	validate_word = 0.0
+	for word in list_of_word:
+		if filter(word):
+			validate_word +=1
 
-w= "§è!çà'"
+	if validate_word !=0:
+		percent = validate_word/10
 
-res= filter(w)
+		if percent >= 0.66:
+			return True
+		else:
+			return False
+	else:
+		return False
+
+
+w= [,,,,,,,,,]
+
+res= group_word(w)
 print(res)
 

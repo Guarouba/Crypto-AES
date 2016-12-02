@@ -70,6 +70,13 @@ def dong():
         pickle.dump(out, file2)
 
 
+def load_all_words():
+    pass
+
+
+all_available_words = load_all_words()
+
+
 def load_word_freq_engligh():
     import pickle
     # print pickle.load(open("Source/dictionary/ukus.txt"))
@@ -149,6 +156,11 @@ def get_possible_matching_words_of_max_length(partial, length):
     for itms in keys_avail:
         candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
     print (set(candidates))
+
+def validate_word(word):
+    if word in all_available_words:
+        return True
+
 
 
 if __name__ == '__main__':

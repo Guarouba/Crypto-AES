@@ -119,7 +119,7 @@ ciphers = [CB, CG]
 currentMessages = []
 shortest = 0
 mode = "cribGuess"  # or cribFollow
-temp_decrypted_text = ""
+tempDecryptedText = ""
 
 # Totally decrypted:
 # Totally decrypted:
@@ -249,7 +249,7 @@ if __name__ == '__main__':
     init()
 
     choice = ""
-    temp_decrypted_text = ""
+    tempDecryptedText = ""
 
     print("The current messages are:")
     print''
@@ -267,8 +267,8 @@ if __name__ == '__main__':
                     "Enter your crib (has to be between \" \"): ")  # use input() instead of raw_input() to be able to use "\n"
 
                 if mode == "cribFollow":
-                    temp_decrypted_text = getTempDecryptedText(cipherNb)
-                    crib = temp_decrypted_text + crib
+                    tempDecryptedText = getTempDecryptedText(cipherNb)
+                    crib = tempDecryptedText + crib
 
                 temp = []  # len = shortest cipher
                 toPrint = []
@@ -308,7 +308,7 @@ if __name__ == '__main__':
                                                                                                  position + cribLenght:]
 
                     if mode == "cribFollow":
-                        temp_decrypted_text = crib
+                        tempDecryptedText = crib
 
                     if isDecrypted(cipherNb):
                         choice = 'end'

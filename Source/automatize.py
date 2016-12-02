@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # -*- coding: Utf-8 -*-
 import sys
 
@@ -116,7 +116,7 @@ Oomj1LwO0CGNDK8WiaFpK0R4MTn+TmQ0V96dclMlqwQchadtYHqOz3s1ZsBsuS6l\
 ql160ogb3o+oJPBlEwf5xpbHr0ZUHSlyZHN7TWiuK4za0qty6KhwJmGkJdzDfFs0\
 WNcvHJaOq+MH5GQ0tkdZ9xlTpy4VXNLlgoCh/qfAcdq5a2FtMa8="
 
-ciphers = [CB, CG]
+# ciphers = [CB, CG]
 currentMessages = []
 shortest = 0
 mode = "cribGuess"  # or cribFollow
@@ -273,18 +273,15 @@ def is_decrypted(ind):
 
 # --------------------------------------  MAIN  --------------------------------------
 
-if __name__ == '__main__':
-
+def bazinga():
+    global tempDecryptedText
     init()
-
     choice = ""
     tempDecryptedText = ""
-
     print("The current messages are:")
     print('')
     printMessages(currentMessages, 128)
     print('')
-
     while choice != "end":
 
         cipherNb = int(input("Enter message number: "))
@@ -363,3 +360,98 @@ if __name__ == '__main__':
         else:
             print("Not correct message number, try again.")
             # print(currentMessages)
+
+
+def dong(): pass
+
+
+if __name__ == '__main__':
+    # wk = [CA, CB, CC, CD, CE, CF, CG, CH, CI, CJ]
+    # for i in wk:
+    #     print (wk)
+    global tempDecryptedText
+init()
+choice = ""
+tempDecryptedText = ""
+print("The current messages are:")
+print('')
+printMessages(currentMessages, 128)
+print('')
+while choice != "end":
+
+    cipherNb = int(input("Enter message number: "))
+
+    if (cipherNb < len(ciphers)) and (cipherNb >= 0):
+        import base64
+
+        try:
+            crib = input(
+                "Enter your crib (have to be between \" \"): ")  # use input() instead of raw_input() to be able to use "\n"
+
+            if mode == "cribFollow":
+                tempDecryptedText = get_temp_decrypted_text(cipherNb)
+                crib = tempDecryptedText + crib
+
+            temp = []  # len = shortest cipher
+            toPrint = []
+            for i in range(shortest - len(crib) + 1):
+                guesses = []  # len = len(ciphers)
+                printed = True
+                for k in range(len(ciphers)):
+                    if cipherNb != k:  # pas de xor avec sois-meme
+                        xored = strxor(base64.b64decode(ciphers[cipherNb]), base64.b64decode(ciphers[k]))
+                        # xored = strxor(ciphers[cipherNb].decode("base64"), ciphers[k].decode("base64"))
+                        guess = strxor(xored[i:i + len(crib)], crib)
+
+                        guesses.append(guess)
+                        if not isGoodGuessHard(guess):
+                            printed = False
+
+                    else:
+                        guesses.append(crib)
+
+                temp.append(guesses)
+                if printed:
+                    toPrint.append(True)
+                else:
+                    toPrint.append(False)
+
+            printGuess(temp, toPrint)
+
+            print("")
+
+            choice = input(
+                "Enter the matched position, 'none' for no match, 'switch' to switch to the other decryption "
+                "mode, or 'end' to quit: ")
+
+            if choice != "none" and choice != "end" and choice != "switch":
+                position = int(choice)
+                for i in range(len(currentMessages)):
+                    cribLenght = len(temp[position][i])
+                    currentMessages[i] = currentMessages[i][:position] + temp[position][i] + currentMessages[i][
+                                                                                             position + cribLenght:]
+
+                if mode == "cribFollow":
+                    tempDecryptedText = crib
+
+                if is_decrypted(cipherNb):
+                    choice = 'end'
+                    print("THE SHORTEST MESSAGE HAS BEEN DECRYPTED")
+
+            elif choice == "switch":
+                switch_mode()
+
+            print("The current messages are:")
+            print()
+
+            printMessages(currentMessages, 128)
+            print()
+
+        except NameError:
+            print("Don't forget to write your crib between \" \"")
+        except SyntaxError:
+            print("Don't forget to write your crib between \" \"")
+
+    else:
+        print("Not correct message number, try again.")
+        # print(currentMessages)

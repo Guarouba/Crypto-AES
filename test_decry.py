@@ -79,7 +79,7 @@ def insert_and_xor(position, index, word):
     l_word = len(word)
     wk_lst = [word]
     for current_message in others_msgs:
-        val = str_xor(wk_word, str_xor(wk_message[index:index + l_word], current_message[index:index + l_word]))
+        val = str_xor(word, str_xor(wk_message[index:index + l_word], current_message[index:index + l_word]))
         wk_lst.append(val)
     return wk_lst
 
@@ -93,6 +93,7 @@ def work_one_messge(msg_no, cur_wrd):
     for i in range(message_len - len(wk_word)):
         ll = insert_and_xor(position=msg_no, index=i, word=wk_word)
         out.append(ll)
+    print out
 
 
 def dong():  # save uk/us dict to file

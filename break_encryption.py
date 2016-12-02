@@ -14,7 +14,7 @@ def read_cyphers(team):
     return ciphers
 
 
-ciphers = read_cyphers(1)
+ciphers = read_cyphers(9)
 current_messages = []
 shortest = 0
 mode = "cribGuess"  # or cribFollow
@@ -154,7 +154,7 @@ def print_guess(guesses, to_print):
                 message_part = [value_2]
                 if helpful_caracters(str(message_part)):
                 	i+=1
-            if i > 1: # if more than 1 'readable' guess
+            if i > 4: # if more than 1 'readable' guess
             	print "\nPosition " + str(index_1) + ": "
             	for index_2, value_2 in enumerate(value_1):  # so it's easier to print "\n" symbols
                 	message_part = [value_2]
@@ -321,4 +321,26 @@ def root_of_all_decryption():
 
 
 if __name__ == '__main__':
-    root_of_all_decryption()
+    #root_of_all_decryption()
+
+    test = "Shame on you! Shame, shame, shame!\nWhat are you trying to do? Are you trying to break my cryptosystem?\nDo you know that reading other people's letters is not very nice and not polite?\nI am not doing that knind of things!\nWho on earth gets into my personal life like that? And why are you doing it?\nIs someone forcing you? No? If not, then what the hell is wrong with you?\nMy messages to Alice are strictly confidential! Only me, Alice and the NSA can read this e-mails..\nSo, dear hacker, stop it right now!\nBest regards,\nEve.\n"
+    test2 = "Vienna is the capital of Austria. It is one of its largests cities.\nVienna is 410 square kilometers, almost 2 million people live there.\nVienna is situated in the Eastern part of Austria, it is standing on Danube river.\nVienna is in the UTC+1 time zone.\nWhen tourists come to Vienna they often visit  Sch\xc3\xb6nbrunn Palace, Austrian Parliament,\nCity Hall, and St. Stephen's Cathedral.\nDo not forget to go to opera when you visit Vienna.\n"
+
+    Fkiv = str_xor(test, ciphers[9].decode("base64")[:10]) # =F(k,iv)
+
+    print(str_xor(Fkiv, ciphers[9].decode("base64")[:10]))
+    print(str_xor(Fkiv, ciphers[1].decode("base64")))
+
+    cipher1 = "lkAF8FsodHaaG7Q8f8JqQVOrV6HvRKHBKkQcKfA5CoVvXF96J1CotuL/+HIDq1+Y\
+NGRrdMrHZ1Gp/dtps+I7DSby8AgN7lSeOVu7lhaaZEVXL6oXi41h+ypzrq5GkoZB\
+qtcaEWcQRrNBKoi1jDH8bpi/ivXqGx+gEXiitHFLr/SpwuPk7DKzX+r2lfy95wIb\
+C73TaOD2qOsM8uQSU7cAiotdxW3Bd7WwKbWZqfeI/7NeIVRsGf0qtAczOThid8Kp\
+o+mvQj+xxr/ojmjsylEvLnTmFu/YOCLWPgRRDCaDXzS1wKHZ6FnjsxBpkeLahT41\
+C8DKbBrgmfW4vuJsWsWvEd1bROd2hqUZiz/c62Hn7Udy4wnQAcSuh3Qc5bhILJKd\
+iVVsAGPFzC8Ub3PNjPQcQTsgI/xxZaK64x0h+rtg0gAdixF33lT88rn7Iev39vlQ\
+edWfTh1rrTx1ZQVg2Tesmn8BdBg00Si29nXK/4fcw5AgyHrIhvcF8bNKBvzq8Yoa\
++2M34Sk44cfJm99GF84VPPI0MRkBZTvXe0YZvMjnia3yGvcrGXpipb9jO7dXycob\
+C9UlMc7tLqtBDU1N/UazB1c/4/8f9wr4tUMkzg=="
+
+    print("")
+    print(str_xor(Fkiv, cipher1.decode("base64")[:10]))

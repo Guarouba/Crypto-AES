@@ -35,11 +35,6 @@ def read_cyphers(team):
 
 def ding():
     cip = [i.decode("base64") for i in read_cyphers(9)[:2]]
-
-    # out_size = shortest_length(cip)
-    # out_msg = [["_".join("_" for i in range(out_size))] for j in range(2)]
-    # for i in out_msg:
-    #     print i
     guess = "Vienna is the capital of Austria."
     l_guess = len(guess)
     msg1 = cip[0][:l_guess]
@@ -47,7 +42,61 @@ def ding():
     print (str_xor(guess, str_xor(msg1, msg2)))
 
 
-def dong():
+def read_cyphers(team):
+    ciphers = []
+    import os
+
+    for i in range(10):
+        if i != 7:
+            fname = os.path.join(os.path.dirname(__file__), "Source", "team" + str(team),
+                                 "message" + str(team) + "_" + chr(97 + i) + ".txt.enc")
+            with open(fname, 'r') as file:
+                ciphers.append(file.read())
+    return ciphers
+
+
+def un_encode():
+    return [i.decode("base64") for i in read_cyphers(9)]
+
+
+de64ed_msgs = un_encode()
+
+
+def insert_and_xor(position, index, word):
+    """
+
+    :param position: in the message to be handled
+    :param _index:  of the principal message
+    :param word:  word to crib
+    :return:
+    """
+    global de64ed_msgs
+    wk_word = word
+    others_msgs = []
+    for _index, val in enumerate(de64ed_msgs):
+        if _index != position:
+            others_msgs.append(val)
+    wk_message = de64ed_msgs[position]
+    l_word = len(word)
+    wk_lst = [word]
+    for i in others_msgs:
+        val = str_xor(wk_word, str_xor(wk_message[index:index + l_word], i[index:index + l_word]))
+        wk_lst.append(val)
+    for i in wk_lst[:3]:
+        print (str(i))
+
+
+def work_one_messge(msg_no, cur_wrd):
+    ll = []
+    global de64ed_msgs
+    wk_word = cur_wrd
+    message_len = len(de64ed_msgs[msg_no])
+    for i in range(message_len - len(wk_word)):
+        ll = insert_and_xor(position=msg_no, index=i, word=wk_word)
+        print ("****")
+
+
+def dong():  # save uk/us dict to file
     import pickle
     uk = []
     us = []
@@ -68,6 +117,26 @@ def dong():
     print(len(out))
     with open("Source/dictionary/ukus.txt", 'wb') as file2:
         pickle.dump(out, file2)
+
+
+def captialize_dict():
+    out = []
+    with open("Source/dictionary/ukus.txt", 'rb') as file1:
+        import pickle
+        ll = pickle.load(file1)
+        print(len(ll))
+        cter = 0
+        for val in ll:
+            if len(val) > 1:
+                out.append(chr(ord(val[0]) - 32).join(val[1:]))
+            else:
+                out.append(chr(ord(val[0]) - 32))
+            if cter < 10:
+                print(val)
+                cter += 1
+        print(out[:10])
+        with open("Source/dictionary/minmaj.bt", 'wb') as file2:
+            pickle.dump(out, file2)
 
 
 def load_all_words():
@@ -134,20 +203,19 @@ def fill_partial_words(phrase):
                 res.append((tmp, cter))
                 cter = 0
                 found = False
-    if found:
-        res.append((tmp, cter))
-    return res[1:] if len(res) > 1 else None
+        if found:
+            res.append((tmp, cter))
+        return res[1:] if len(res) > 1 else None
 
-
-def create_hash_crib():
-    global hash_crib_dictionary
-    ll = load_word_freq_engligh()
-    for current_word in ll:
-        create_indiv_crib_hash(current_word)
-        # print ll
-        # for i, j in sorted(hash_crib_dictionary.iteritems()):
-        #     print (i + "->" + str(j))
-    print(len(hash_crib_dictionary))
+        # def create_hash_crib():
+        #     global hash_crib_dictionary
+        #     ll = load_word_freq_engligh()
+        #     for current_word in ll:
+        #         create_indiv_crib_hash(current_word)
+        #         # print ll
+        #         # for i, j in sorted(hash_crib_dictionary.iteritems()):
+        #         #     print (i + "->" + str(j))
+        #     print(len(hash_crib_dictionary))
 
 
 def get_possible_matching_words_of_max_length(partial, length):
@@ -156,14 +224,23 @@ def get_possible_matching_words_of_max_length(partial, length):
     for itms in keys_avail:
         candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
     print (set(candidates))
+    return candidates
+
 
 def validate_word(word):
     if word in all_available_words:
         return True
+
+        # print([capitalize(i) for i in])
 
 
 if __name__ == '__main__':
     # fin_spaces(mof)
     # create_hash_crib()
     # get_possible_matching_words_of_max_length("he", 6)
-    fill_partial_words(mof)
+    # fill_partial_words(mof)
+    # captialize_dict()
+    # for current_word in load_word_freq_engligh()[:1]:
+    #     print (current_word)
+    #     work_one_messge(1, current_word)
+    work_one_messge(1, "Vienna")

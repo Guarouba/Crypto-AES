@@ -162,7 +162,6 @@ def validate_word(word):
         return True
 
 
-
 if __name__ == '__main__':
     # fin_spaces(mof)
     # create_hash_crib()

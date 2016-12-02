@@ -71,7 +71,6 @@ def insert_and_xor(position, index, word):
     :return:
     """
     global de64ed_msgs
-    wk_word = word
     others_msgs = []
     for _index, val in enumerate(de64ed_msgs):
         if _index != position:
@@ -79,11 +78,10 @@ def insert_and_xor(position, index, word):
     wk_message = de64ed_msgs[position]
     l_word = len(word)
     wk_lst = [word]
-    for i in others_msgs:
-        val = str_xor(wk_word, str_xor(wk_message[index:index + l_word], i[index:index + l_word]))
+    for current_message in others_msgs:
+        val = str_xor(wk_word, str_xor(wk_message[index:index + l_word], current_message[index:index + l_word]))
         wk_lst.append(val)
-    for i in wk_lst[:3]:
-        print (str(i))
+    return wk_lst
 
 
 def work_one_messge(msg_no, cur_wrd):
@@ -91,9 +89,10 @@ def work_one_messge(msg_no, cur_wrd):
     global de64ed_msgs
     wk_word = cur_wrd
     message_len = len(de64ed_msgs[msg_no])
+    out = []
     for i in range(message_len - len(wk_word)):
         ll = insert_and_xor(position=msg_no, index=i, word=wk_word)
-        print ("****")
+        out.append(ll)
 
 
 def dong():  # save uk/us dict to file

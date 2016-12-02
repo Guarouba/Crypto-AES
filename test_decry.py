@@ -157,8 +157,10 @@ def get_possible_matching_words_of_max_length(partial, length):
         candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
     print (set(candidates))
 
-def check_in_dictionnary(word):
-    
+def validate_word(word):
+    if word in all_available_words:
+        return True
+
 
 
 if __name__ == '__main__':

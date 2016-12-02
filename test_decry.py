@@ -150,6 +150,9 @@ def get_possible_matching_words_of_max_length(partial, length):
         candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
     print (set(candidates))
 
+def check_in_dictionnary(word):
+    
+
 
 if __name__ == '__main__':
     # fin_spaces(mof)

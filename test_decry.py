@@ -89,21 +89,70 @@ def create_indiv_crib_hash(word):
     l_word = len(word)
     while crib_size <= l_word:
         for i in range(l_word - crib_size + 1):
-            temp_l = hash_crib_dictionary.get(word[i:crib_size + 1], set())
+            temp_l = hash_crib_dictionary.get(word[i:i + crib_size], set())
             temp_l.add(word)
-            hash_crib_dictionary[word[i:crib_size + 1]] = temp_l
+            hash_crib_dictionary[word[i:i + crib_size]] = temp_l
         crib_size += 1
 
 
+mof = "a---cdef----gikx--eds------m------"
+
+
+# def fin_spaces(word):
+#     global mof
+#     ranges = []
+#     start, end = -1, -1
+#     temp = -1
+#     for index, item in enumerate(word):
+#         if item == "*":
+#             if index>end&&
+
+
+def fill_partial_words(phrase):
+    print(phrase.split("-"))
+    phrase = phrase.split("-")
+    cter = -1
+    tmp = -1
+    res = []
+    found = False
+    for index, val in enumerate(phrase):
+        if not found and val == "":
+            tmp = index
+            cter = 1
+            found = True
+        else:
+            if val == "":
+                cter += 1
+            else:
+                res.append((tmp, cter))
+                cter = 0
+                found = False
+    if found:
+        res.append((tmp, cter))
+    return res[1:] if len(res) > 1 else None
+
+
 def create_hash_crib():
-    ll = load_word_freq_engligh()[:40]
+    global hash_crib_dictionary
+    ll = load_word_freq_engligh()
     for current_word in ll:
         create_indiv_crib_hash(current_word)
-    print ll
-    print hash_crib_dictionary
+        # print ll
+        # for i, j in sorted(hash_crib_dictionary.iteritems()):
+        #     print (i + "->" + str(j))
+    print(len(hash_crib_dictionary))
+
+
+def get_possible_matching_words_of_max_length(partial, length):
+    keys_avail = [i for i in hash_crib_dictionary if partial in i]
+    candidates = []
+    for itms in keys_avail:
+        candidates += [i for i in hash_crib_dictionary[itms] if len(i) <= length]
+    print (set(candidates))
 
 
 if __name__ == '__main__':
-    # dong()
-    # load_word_freq_engligh()
-    create_hash_crib()
+    # fin_spaces(mof)
+    # create_hash_crib()
+    # get_possible_matching_words_of_max_length("he", 6)
+    fill_partial_words(mof)

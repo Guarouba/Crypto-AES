@@ -100,9 +100,24 @@
 sudo apt-get install texlive-lang-cyrillic
 
 \section{Block Cipher CTR}
+When we want to encrypt a long message, we have to divide it into a series of sequential blocks. AES-CTR is a one-time pad algorithm that encrypt these blocks one at a time. The counter mode encryption (CTR) use a counter value in addition to the Initial Vector (IV):\\
+To encrypt a message we follow these steps:
+\begin{enumerate}
+	\item  Encrypt using a block cipher (AES-128 in our case) the IV with the key.
+	\item  XOR the result from step 1 with the first part of the plaintext. It results on the first part of the cipher text C1.
+	\item  C1 is send to the receiver and the counter is updated.
+	\item  We repeat theses steps until all plaintext is encrypted.
+\end{enumerate}
+In decryption mode, we do the reverse process. Notice that we have to use the same counter value than when we encrypt c.
+
+\includegraphics{CTR.png}
 
 \section{Security problem (same IV and key)}
-
+However this procedure is vulnerable if misused. If two messages are send with the same IV, an attacker can more or less easily recover the messages. For example, suppose Bob send two messages M1 and M2 with the same IV and same key. Then the block cipher encryption will produce the same result K for the two messages. And then : \\
+C1 = M1 $\oplus$ K \\
+C2  = M2 $\oplus$ K \\
+If an attacker intercepts the ciphers and XOR them, he obtains the original XORed messages:\\
+C1 $\oplus$ C2 = M1 $\oplus$ M2.
 \section{Code Description}
 
 \section{Difficulties}
